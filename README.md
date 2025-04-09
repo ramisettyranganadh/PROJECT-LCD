@@ -12,6 +12,8 @@ cd LCD-show/
 
 sudo ./LCD35-show
 
+sudo apt --fix-broken install
+
 sudo ./LCD-hdmi #switch to HDMI
 
 -------------------------------------------------------
