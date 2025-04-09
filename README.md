@@ -12,6 +12,12 @@ cd LCD-show/
 
 sudo ./LCD35-show
 
+sudo systemctl disable glamor-test.service
+
+sudo rm /usr/share/X11/xorg.conf.d/20-noglamor.conf
+
+sudo systemctl restart lightdm
+
 sudo apt --fix-broken install
 
 sudo ./LCD-hdmi #switch to HDMI
