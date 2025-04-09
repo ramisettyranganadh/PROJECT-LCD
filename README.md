@@ -1,3 +1,7 @@
+sudo raspi-config #To Enable SPI
+
+sudo apt-get update; sudo apt-get upgrade
+
 sudo rm -rf LCD-show
 
 git clone https://github.com/goodtft/LCD-show.git
@@ -8,11 +12,7 @@ cd LCD-show/
 
 sudo ./LCD35-show
 
-sudo raspi-config #To Enable SPI
-
-sudo apt-get update; sudo apt-get upgrade
-
-sudo ./LCD-hdmi
+sudo ./LCD-hdmi #switch to HDMI
 
 -------------------------------------------------------
 
