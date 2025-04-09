@@ -18,6 +18,24 @@ sudo rm /usr/share/X11/xorg.conf.d/20-noglamor.conf
 
 sudo systemctl restart lightdm
 
+sudo rm /usr/share/X11/xorg.conf.d/20-noglamor.conf
+sudo sed -e '/dtoverlay=vc4/ s/^#*/#/' -i /boot/firmware/config.txt
+sudo sed -i -e '/greeter-session=/ s/=.*/=pi-greeter/' /etc/lightdm/lightdm.conf
+sudo sed -i -e '/user-session=/ s/=.*/=LXDE-pi-x/' /etc/lightdm/lightdm.conf
+sudo sed -i -e '/autologin-session=/ s/=.*/=LXDE-pi-x/' /etc/lightdm/lightdm.conf
+sudo systemctl disable glamor-test.service
+git clone https://github.com/goodtft/LCD-show.git
+chmod -R 755 LCD-show
+cd LCD-show
+#force the resolution to be 720 x 480 the display scales it and makes it more usable and is still pretty clear
+sudo sed -i -e '/hdmi_cvt / s/480 320/ 720 480/' ./LCD35-show
+#rotate the display 180 so the power plug is on top instead of the bottom
+sudo ./LCD35-show 180
+sudo systemctl disable glamor-test.service
+sudo cat /usr/share/X11/xorg.conf.d/20-noglamor.conf | sed -e '/EndSection/i Driver "fbdev"' > /usr/share/X11/xorg.conf.d/21-noglamor.conf
+sudo rm /usr/share/X11/xorg.conf.d/20-noglamor.conf
+sudo systemctl restart lightdm
+
 sudo apt --fix-broken install
 
 sudo ./LCD-hdmi #switch to HDMI
